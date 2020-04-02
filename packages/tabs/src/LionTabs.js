@@ -1,4 +1,4 @@
-import { LitElement, css, html } from '@lion/core';
+import { LitElement, css, html } from 'lit-element';
 
 const uuid = () =>
   Math.random()
@@ -54,15 +54,19 @@ const deselectButton = element => {
   element.setAttribute('tabindex', -1);
 };
 
+/**
+ * LionTabs implements tabs view to allow users to quickly move between a small number of equally important views.
+ *
+ * @slot tab - All tabs/buttons/triggers need the tab slot
+ * @slot panel - Every content frame/panel needs the panel slot
+ */
 export class LionTabs extends LitElement {
   static get properties() {
     return {
-      /**
-       * index number of the selected tab
-       */
       selectedIndex: {
         type: Number,
-        value: 0,
+        attribute: 'selected-index',
+        reflect: true,
       },
     };
   }
@@ -108,11 +112,14 @@ export class LionTabs extends LitElement {
 
   constructor() {
     super();
+    /**
+     * An index number of the selected tab
+     */
     this.selectedIndex = 0;
   }
 
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this.__firstUpdate = true;
     this.__setupSlots();
   }
