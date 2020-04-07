@@ -14,7 +14,7 @@
     "esModuleInterop": true
   },
   "files": ["browser.d.ts"],
-  "include": ["packages/tabs/**/*"],
+  "include": ["packages/core/**/*", "packages/tabs/**/*"],
   "exclude": [
     "node_modules",
     "**/node_modules/*",
